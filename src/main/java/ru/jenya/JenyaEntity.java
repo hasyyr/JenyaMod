@@ -51,7 +51,7 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.getEntityWorld().isClient() && player instanceof net.minecraft.server.network.ServerPlayerEntity serverPlayer) {
-            serverPlayer.sendMessage(Text.literal("§dЖеня: Привет! 💚 Напиши /zhenya talk <сообщение>, чтобы поговорить со мной через Ollama. Текущая модель: " + JenyaDialogue.getModel()), false);
+            JenyaDialogue.talk(serverPlayer, "Поздоровайся со мной по-русски, как живая дружелюбная спутница в Minecraft, и предложи поговорить.");
         }
         return ActionResult.SUCCESS;
     }

@@ -62,7 +62,7 @@ public final class JenyaMod implements ModInitializer {
     private static int spawnJenya(ServerCommandSource source) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayerOrThrow();
         BlockPos pos = player.getBlockPos().offset(player.getHorizontalFacing(), 2);
-        JenyaEntity spawned = JENYA.spawn(player.getServerWorld(), pos, SpawnReason.COMMAND);
+        JenyaEntity spawned = JENYA.spawn(player.getEntityWorld(), pos, SpawnReason.COMMAND);
         if (spawned == null) {
             source.sendError(Text.literal("Не удалось создать Женю. Попробуй выбрать другое место."));
             return 0;

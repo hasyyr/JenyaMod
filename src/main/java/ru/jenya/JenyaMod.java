@@ -20,7 +20,7 @@ public final class JenyaMod implements ModInitializer {
   EntityType.Builder.create(JenyaEntity::new, SpawnGroup.CREATURE).dimensions(0.75f,1.95f)
    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"jenya"))));
  public static final Item JENYA_SPAWN_EGG = Registry.register(Registries.ITEM, Identifier.of(MOD_ID,"jenya_spawn_egg"),
-  new SpawnEggItem(new Item.Settings().spawnEgg(JENYA).registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, "jenya_spawn_egg"))));
+  new SpawnEggItem(new Item.Settings().spawnEgg(JENYA).registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, "jenya_spawn_egg")))));
  @Override public void onInitialize() {
   FabricDefaultAttributeRegistry.register(JENYA, JenyaEntity.createAttributes());
   ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> entries.add(JENYA_SPAWN_EGG));

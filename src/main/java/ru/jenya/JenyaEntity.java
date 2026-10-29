@@ -61,7 +61,7 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
         @Override
         public boolean canStart() {
-            PlayerEntity candidate = this.jenya.getWorld().getClosestPlayer(this.jenya, this.followRange);
+            PlayerEntity candidate = this.jenya.getEntityWorld().getClosestPlayer(this.jenya, this.followRange);
             if (candidate == null || candidate.isSpectator() || candidate.isCreative()) {
                 return false;
             }

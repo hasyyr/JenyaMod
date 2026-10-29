@@ -1,0 +1,31 @@
+JENYA — СБОРКА И ДИАГНОСТИКА (ЭТАП 14)
+========================================
+
+Цель
+----
+Подготовить удобный способ получить диагностический отчёт с Windows-машины, где установлен Gradle/IntelliJ и реально можно выполнить сборку Minecraft-мода.
+
+Перед запуском
+--------------
+- JDK 21 установлен и выбран как Gradle JVM.
+- Gradle доступен в PATH ИЛИ проект открыт через IntelliJ IDEA.
+- Интернет доступен для загрузки зависимостей Fabric/GeckoLib.
+- В проекте выбрана именно Minecraft 1.21.11.
+
+Порядок
+-------
+1. Открой проект в IntelliJ IDEA.
+2. В терминале в корне проекта выполни:
+   `python tools/validate_project.py`
+   `python tools/audit_api_surface.py`
+   `python tools/check_build_prerequisites.py`
+3. Затем запусти:
+   `gradle clean build --stacktrace`
+   Если команда `gradle` отсутствует, используй Gradle tool window в IntelliJ:
+   Tasks -> build -> build.
+4. Если сборка успешна, запусти `runClient` через Gradle tool window.
+5. Для диагностики пришли `JENYA_DIAGNOSTICS.zip` или скопируй полный текст ошибки.
+
+Важно
+-----
+Проверки Python — только статический аудит ресурсов и структуры. Они не заменяют Gradle-компиляцию. Не распространяй JAR до успешного clean build и тестового запуска.

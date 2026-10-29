@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "jenya",
+  "version": "${version}",
+  "name": "Женя",
+  "description": "Отдельный персонаж Женя на адаптируемой модели Ellie.",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ru.jenya.JenyaMod"
+    ],
+    "client": [
+      "ru.jenya.client.JenyaClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*",
+    "geckolib": ">=5.4.3"
+  }
+}

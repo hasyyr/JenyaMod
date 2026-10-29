@@ -1,0 +1,115 @@
+=== validate_project.py; exit=0 ===
+ПРОВЕРКА ПРОЕКТА JENYA — СТАТИЧЕСКИЙ PREFLIGHT
+====================================================
+[OK] Геометрия модели: найден
+[OK] Анимации: найден
+[OK] Основная текстура: найден
+[OK] fabric.mod.json: найден
+[OK] Client item definition для spawn egg: найден
+[OK] Модель предмета spawn egg: найден
+[OK] Текстура spawn egg: найден
+[OK] Русская локализация: найден
+[OK] Английская локализация: найден
+[OK] Главный Java-класс: найден
+[OK] Класс сущности: найден
+[OK] Клиентский renderer-класс: найден
+[OK] В geo JSON есть minecraft:geometry
+[OK] Кости модели найдены: 425
+[OK] В описании модели заданы размеры текстуры
+[OK] Найдена анимация animation.ellie.idle
+[OK] Найдена анимация animation.ellie.walk
+[OK] Клипы анимации найдены: 42
+[OK] Русское имя сущности задано
+[OK] Русское имя яйца призыва задано
+[OK] Английское имя сущности задано
+[OK] Английское имя яйца призыва задано
+[OK] Client item definition использует minecraft:model
+[OK] Client item definition ссылается на модель jenya:item/jenya_spawn_egg
+[OK] Модель spawn egg наследует minecraft:item/generated
+[OK] Модель spawn egg ссылается на собственную текстуру
+[OK] Текстура яйца призыва имеет размер 16×16
+[OK] PNG читается: 4096×4096
+[OK] ID мода = jenya
+[OK] Главный entrypoint объявлен
+[OK] Клиентский entrypoint объявлен
+[OK] fabric.mod.json ориентирован на Minecraft 1.21.11
+[OK] GeckoLib объявлен зависимостью
+[OK] GeoEntity регистрирует контроллер анимации
+[OK] Java-контроллер использует найденные idle/walk клипы
+[OK] Добавлено поведение следования за ближайшим игроком
+[OK] Follow goal ищет игрока и использует навигацию
+[OK] Для следования заданы дистанции начала/остановки
+[OK] Регистрация рендера присутствует
+[WARN] Модель содержит 425 костей: проверьте импорт в Blockbench/GeckoLib 5
+[WARN] Текстура крупная; это допустимо, но визуальную UV-развёртку нужно проверить в игре
+----------------------------------------------------
+Ошибок: 0 | Предупреждений: 2
+ВАЖНО: этот скрипт не компилирует Java и не запускает Minecraft.
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
+
+=== audit_api_surface.py; exit=0 ===
+JENYA — API/BUILD STATIC AUDIT
+========================================
+[OK] JenyaEntity.java присутствует
+[OK] JenyaMod.java присутствует
+[OK] JenyaClient.java присутствует
+[OK] build.gradle присутствует
+[OK] fabric.mod.json присутствует
+[OK] Сущность использует PathAwareEntity для навигации
+[OK] FollowNearbyPlayerGoal объявлен
+[OK] Следование использует навигацию сущности
+[OK] Поиск ближайшего игрока присутствует
+[OK] GeckoLib controller объявлен
+[OK] Код содержит регистрацию/создание атрибутов сущности
+[OK] В Java-коде присутствует регистрация spawn egg
+[OK] Регистрация renderer присутствует
+[OK] build.gradle содержит Minecraft 1.21.11
+[OK] build.gradle содержит артефакт GeckoLib для 1.21.11
+[OK] fabric.mod.json ID совпадает с jenya
+[OK] Main entrypoint объявлен
+[OK] Client entrypoint объявлен
+[WARN] Creative-игроки намеренно исключены из цели следования
+----------------------------------------
+Ошибок проверок структуры: 0 | Предупреждений: 1
+Это не замена Gradle-компиляции: совместимость API подтверждается только реальной сборкой.
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
+
+=== check_build_prerequisites.py; exit=0 ===
+JENYA BUILD READINESS
+=====================
+Java executable: /usr/bin/java
+Gradle executable: NOT FOUND
+Gradle wrapper: NOT FOUND
+Gradle wrapper JAR: NOT FOUND
+build.gradle: FOUND
+fabric.mod.json: FOUND
+
+Этот скрипт только проверяет наличие инструментов и файлов; сборку не выполняет.
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.

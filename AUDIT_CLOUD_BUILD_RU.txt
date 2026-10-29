@@ -1,0 +1,7 @@
+CLOUD BUILD SETUP
+=================
+- Added GitHub Actions workflow `.github/workflows/build.yml`.
+- Workflow sets up Java 21 and Gradle 8.14.3, runs static checks, then `gradle --no-daemon clean build --stacktrace`.
+- Successful build uploads `build/libs/*.jar` as artifact for 14 days.
+- Changed Loom plugin ID to `net.fabricmc.fabric-loom-remap` for Minecraft 1.21.11 (the versioned Fabric docs say the remap ID is for 1.21.11 and older).
+- No cloud run was triggered because no user GitHub repository is connected/selected. JAR not built yet.

@@ -1,4 +1,4 @@
-plugins { id 'net.fabricmc.fabric-loom-remap' version '1.11-SNAPSHOT' }
+plugins { id 'net.fabricmc.fabric-loom-remap' version '1.11.8' }
 version = '0.2.0'
 group = 'ru.jenya'
 base { archivesName = 'jenya-fabric-1.21.11' }

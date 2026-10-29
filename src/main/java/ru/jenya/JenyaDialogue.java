@@ -46,7 +46,7 @@ public final class JenyaDialogue {
             return;
         }
 
-        MinecraftServer server = player.getServer();
+        MinecraftServer server = player.getEntityWorld().getServer();
         UUID playerId = player.getUuid();
         String requestedModel = model;
         player.sendMessage(Text.literal("§dЖеня: §7Секундочку, думаю…"), false);

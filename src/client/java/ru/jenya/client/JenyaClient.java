@@ -10,7 +10,7 @@ public final class JenyaClient implements ClientModInitializer {
     public void onInitializeClient() {
         EntityRendererRegistry.register(
             JenyaMod.JENYA,
-            context -> new GeoEntityRenderer<>(context, JenyaMod.JENYA)
+            context -> new GeoEntityRenderer<>(context, new JenyaModel())
         );
     }
 }

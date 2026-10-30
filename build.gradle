@@ -116,7 +116,7 @@ tasks.register('recolorJenyaTexture') {
                     if (saturation < 0.24) {
                         double v = lum / 255.0
                         double[] stops = [0.0d, 0.18d, 0.38d, 0.58d, 0.78d, 1.0d] as double[]
-                        int[][] palette = [[20,22,30],[34,39,52],[42,74,85],[47,160,164],[110,213,208],[232,240,235]] as int[][]
+                        int[][] palette = [[18,20,27],[27,31,40],[35,48,57],[43,78,87],[76,116,123],[132,153,151]] as int[][]
                         int segment = 0
                         while (segment < stops.length - 2 && v > stops[segment + 1]) segment++
                         double t = (v - stops[segment]) / (stops[segment + 1] - stops[segment])

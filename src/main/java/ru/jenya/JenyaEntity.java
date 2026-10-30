@@ -4,11 +4,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -24,6 +25,14 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
         RawAnimation.begin().thenLoop("animation.ellie.walk");
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+    private boolean following = true;
+
+    public boolean isFollowing() { return this.following; }
+
+    public void setFollowing(boolean following) {
+        this.following = following;
+        if (!following) this.getNavigation().stop();
+    }
 
     public JenyaEntity(EntityType<? extends PathAwareEntity> type, World world) {
         super(type, world);
@@ -38,11 +47,14 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
     @Override
     protected void initGoals() {
-        // Companion behavior: approach a nearby player, then idle when close.
         this.goalSelector.add(1, new FollowNearbyPlayerGoal(this, 1.05, 12.0, 2.5));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.9));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(4, new LookAroundGoal(this));
+    }
+
+    @Override
+    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        return ActionResult.SUCCESS;
     }
 
     private static final class FollowNearbyPlayerGoal extends Goal {
@@ -62,7 +74,8 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
         @Override
         public boolean canStart() {
             PlayerEntity candidate = this.jenya.getEntityWorld().getClosestPlayer(this.jenya, this.followRange);
-            if (candidate == null || candidate.isSpectator() || candidate.isCreative()) {
+            // Creative players are valid companion owners too; only spectators are ignored.
+            if (!this.jenya.isFollowing() || candidate == null || candidate.isSpectator()) {
                 return false;
             }
             if (this.jenya.squaredDistanceTo(candidate) <= this.stopDistance * this.stopDistance) {
@@ -74,7 +87,8 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
         @Override
         public boolean shouldContinue() {
-            return this.target != null
+            return this.jenya.isFollowing()
+                && this.target != null
                 && this.target.isAlive()
                 && !this.target.isSpectator()
                 && this.jenya.squaredDistanceTo(this.target) > this.stopDistance * this.stopDistance

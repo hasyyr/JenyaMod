@@ -84,7 +84,7 @@ tasks.register('recolorJenyaTexture') {
             List<String> lineage = ancestors(b.name as String)
             boolean isHair = lineage.any { it in ['hair', 'frontHair', 'headband'] }
             boolean underHead = lineage.contains('head')
-            boolean isClothing = !underHead && lineage.any { it in ['torso', 'armL', 'armR', 'lowerArmL', 'lowerArmR', 'legL', 'legR', 'body', 'armorChest', 'armorLegs', 'armorBoots'] }
+            boolean isClothing = !underHead && lineage.any { it in ['torso', 'armL', 'armR', 'lowerArmL', 'lowerArmR', 'legL', 'legR', 'body', 'armorChest', 'armorLegs', 'armorBoots', 'hip', 'hotpants', 'slip', 'bra'] }
             (b.cubes ?: []).each { cube ->
                 (cube.uv ?: [:]).values().each { uv ->
                     if (isHair) addRect(hair, uv)

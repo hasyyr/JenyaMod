@@ -50,8 +50,12 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (!this.getEntityWorld().isClient() && player instanceof net.minecraft.server.network.ServerPlayerEntity serverPlayer) {
-            JenyaDialogue.talk(serverPlayer, "Поздоровайся со мной по-русски, как живая дружелюбная спутница в Minecraft, и предложи поговорить.");
+        if (hand != Hand.MAIN_HAND) {
+            return ActionResult.SUCCESS;
+        }
+        if (!this.getEntityWorld().isClient()
+                && player instanceof net.minecraft.server.network.ServerPlayerEntity serverPlayer) {
+            JenyaDialogue.talk(serverPlayer, "Привет, Женя! Давай поговорим.");
         }
         return ActionResult.SUCCESS;
     }

@@ -49,6 +49,10 @@ public final class JenyaMod implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(
             CommandManager.literal("zhenya")
                 .executes(context -> spawnJenya(context.getSource()))
+                .then(CommandManager.literal("follow")
+                    .executes(context -> setFollowing(context.getSource(), true)))
+                .then(CommandManager.literal("stay")
+                    .executes(context -> setFollowing(context.getSource(), false)))
                 .then(CommandManager.literal("talk")
                     .then(CommandManager.argument("message", StringArgumentType.greedyString())
                         .executes(context -> talkToJenya(context.getSource(),
@@ -69,6 +73,20 @@ public final class JenyaMod implements ModInitializer {
             return 0;
         }
         source.sendFeedback(() -> Text.literal("§dЖеня появилась рядом с тобой. 💚 ПКМ по ней — приветствие; /zhenya talk <сообщение> — диалог с Ollama."), false);
+        return 1;
+    }
+
+    private static int setFollowing(ServerCommandSource source, boolean following) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+        ServerPlayerEntity player = source.getPlayerOrThrow();
+        JenyaEntity jenya = player.getEntityWorld().getEntitiesByClass(
+            JenyaEntity.class, player.getBoundingBox().expand(16.0), entity -> true
+        ).stream().min(java.util.Comparator.comparingDouble(player::squaredDistanceTo)).orElse(null);
+        if (jenya == null) {
+            source.sendError(Text.literal("Рядом нет Жени. Сначала вызови /zhenya."));
+            return 0;
+        }
+        jenya.setFollowing(following);
+        source.sendFeedback(() -> Text.literal(following ? "§dЖеня: Иду за тобой! 💚" : "§dЖеня: Хорошо, останусь здесь."), false);
         return 1;
     }
 

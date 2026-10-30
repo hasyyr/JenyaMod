@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.PathAwareEntity;
@@ -49,6 +50,7 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
     protected void initGoals() {
         // Companion behavior: approach a nearby player, then idle when close.
         this.goalSelector.add(1, new FollowNearbyPlayerGoal(this, 1.05, 12.0, 2.5));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.9));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(4, new LookAroundGoal(this));
     }

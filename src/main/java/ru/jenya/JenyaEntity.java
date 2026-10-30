@@ -47,7 +47,6 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
     @Override
     protected void initGoals() {
-        // Companion behavior: approach a nearby player, then idle when close.
         this.goalSelector.add(1, new FollowNearbyPlayerGoal(this, 1.05, 12.0, 2.5));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(4, new LookAroundGoal(this));
@@ -75,7 +74,8 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
         @Override
         public boolean canStart() {
             PlayerEntity candidate = this.jenya.getEntityWorld().getClosestPlayer(this.jenya, this.followRange);
-            if (!this.jenya.isFollowing() || candidate == null || candidate.isSpectator() || candidate.isCreative()) {
+            // Creative players are valid companion owners too; only spectators are ignored.
+            if (!this.jenya.isFollowing() || candidate == null || candidate.isSpectator()) {
                 return false;
             }
             if (this.jenya.squaredDistanceTo(candidate) <= this.stopDistance * this.stopDistance) {

@@ -24,7 +24,7 @@ public final class JenyaCommandScreen extends Screen {
 
         this.addDrawableChild(ButtonWidget.builder(Text.literal("Давай поговорим"), button -> {
             if (this.client != null) {
-                this.client.setScreen(new ChatScreen("/zhenya talk "));
+                this.client.setScreen(new ChatScreen("/zhenya talk ", false));
             }
         }).dimensions(left, top + 52, 210, 20).build());
     }

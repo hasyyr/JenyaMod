@@ -38,7 +38,9 @@ public final class JenyaCommandScreen extends Screen {
 
     @Override
     public void render(net.minecraft.client.gui.DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context, mouseX, mouseY, delta);
+        // Draw a simple dimmed background. Screen.renderBackground() applies blur,
+        // which can conflict with Minecraft's already-blurred world background.
+        context.fill(0, 0, this.width, this.height, 0xA0101018);
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, this.height / 2 - 72, 0xFFFFFF);
         super.render(context, mouseX, mouseY, delta);
     }

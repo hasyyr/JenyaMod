@@ -11,7 +11,6 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -27,6 +26,14 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
         RawAnimation.begin().thenLoop("animation.ellie.walk");
 
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+    private boolean following = true;
+
+    public boolean isFollowing() { return this.following; }
+
+    public void setFollowing(boolean following) {
+        this.following = following;
+        if (!following) this.getNavigation().stop();
+    }
 
     public JenyaEntity(EntityType<? extends PathAwareEntity> type, World world) {
         super(type, world);
@@ -50,13 +57,6 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
     @Override
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (hand != Hand.MAIN_HAND) {
-            return ActionResult.SUCCESS;
-        }
-        if (!this.getEntityWorld().isClient()
-                && player instanceof net.minecraft.server.network.ServerPlayerEntity serverPlayer) {
-            JenyaDialogue.talk(serverPlayer, "Привет, Женя! Давай поговорим.");
-        }
         return ActionResult.SUCCESS;
     }
 
@@ -77,7 +77,7 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
         @Override
         public boolean canStart() {
             PlayerEntity candidate = this.jenya.getEntityWorld().getClosestPlayer(this.jenya, this.followRange);
-            if (candidate == null || candidate.isSpectator() || candidate.isCreative()) {
+            if (!this.jenya.isFollowing() || candidate == null || candidate.isSpectator() || candidate.isCreative()) {
                 return false;
             }
             if (this.jenya.squaredDistanceTo(candidate) <= this.stopDistance * this.stopDistance) {
@@ -89,7 +89,8 @@ public class JenyaEntity extends PathAwareEntity implements GeoEntity {
 
         @Override
         public boolean shouldContinue() {
-            return this.target != null
+            return this.jenya.isFollowing()
+                && this.target != null
                 && this.target.isAlive()
                 && !this.target.isSpectator()
                 && this.jenya.squaredDistanceTo(this.target) > this.stopDistance * this.stopDistance
